@@ -36,7 +36,10 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: TS_KUBE_SECRET
-              value: {{ .Values.tailscale.state.secretName }}
+#               value: {{ .Values.tailscale.state.secretName }}
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
             - name: TS_USERSPACE
               value: "true"
             - name: TS_AUTH_KEY
